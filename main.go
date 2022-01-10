@@ -1,16 +1,26 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
 
 func main() {
-	r := gin.Default()
+	log.Print("starting server PORT:8080")
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"dev": "go",
-			"message": "Hello World!",
-		})
-	})
+	http.HandleFunc("/favicon.ico", favicon)
 
-	r.Run()
+	http.HandleFunc("/", handler)
+
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func favicon(w http.ResponseWriter, r *http.Request) {}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	log.Print(r.URL.Path)
+	fmt.Fprintf(w, "Hello world!\n\nVersion: 1.0.0\n\nService: Hello world!")
 }
