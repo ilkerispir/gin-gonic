@@ -22,5 +22,5 @@ func favicon(w http.ResponseWriter, r *http.Request) {}
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	log.Print(r.URL.Path)
-	fmt.Fprintf(w, "Hello world!\n\nVersion: 1.0.0\n\nService: Hello world!")
+	fmt.Fprintf(w, "Hello world!\n\nVersion: 1.0.0\n\nService: Hello world!\n")
 }
